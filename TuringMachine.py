@@ -23,14 +23,14 @@ class TuringMachine(object):
         self._houve_transicao = True
 
         print()
-        self._imprimeConfiguracaoAtualFita()        
+        self._imprime_configuracao_atual_fita()        
         
         while (self._houve_transicao):
             simbolo = self._fita[self._posicao_cabeca_leitura]
-            self._efetuarTransicao(self._estado_atual, simbolo, self._fita)
+            self._efetuar_transicao(self._estado_atual, simbolo, self._fita)
 
 
-    def _efetuarTransicao(self, estadoAtual, simbolo, fita):
+    def _efetuar_transicao(self, estadoAtual, simbolo, fita):
 
         self._houve_transicao = False
 
@@ -42,9 +42,9 @@ class TuringMachine(object):
             
                 # Escreve o novo simbolo na fita. É necessário transformar a fita em Lista, modificá-la e voltar para
                 # String, pois em python Strings são imutáveis
-                fitaEmLista = list(self._fita)
-                fitaEmLista[self._posicao_cabeca_leitura] = self._transicoes[i][3]
-                self._fita = ''.join(map(str, fitaEmLista))
+                fita_em_lista = list(self._fita)
+                fita_em_lista[self._posicao_cabeca_leitura] = self._transicoes[i][3]
+                self._fita = ''.join(map(str, fita_em_lista))
 
                 # Atualiza o estado atual
                 self._estado_atual = self._transicoes[i][2]
@@ -53,14 +53,14 @@ class TuringMachine(object):
                 self._posicao_cabeca_leitura = self._posicao_cabeca_leitura + 1 if self._transicoes[i][4] == 'R' else self._posicao_cabeca_leitura - 1
 
                 if (self._posicao_cabeca_leitura < 0):
-                    sys.exit("MT Travou! Nao e possivel executar transicao a esquerda do B inicial!")
+                    sys.exit("MT Travou! Nao eh possivel executar transicao a esquerda do inicio da fita!")
                 
-                self._imprimeConfiguracaoAtualFita()
+                self._imprime_configuracao_atual_fita()
                 self._houve_transicao = True
 
                 break
     
-    def _imprimeConfiguracaoAtualFita(self):
+    def _imprime_configuracao_atual_fita(self):
 
         # Concatena o estado atual na posicao da cabeça de L/G da fita e imprime
         configuracao = self._fita[:self._posicao_cabeca_leitura] + '{' + self._estado_atual + '}' + self._fita[self._posicao_cabeca_leitura:]
