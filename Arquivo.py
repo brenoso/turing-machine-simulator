@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 
 class Arquivo(object):
@@ -7,57 +6,51 @@ class Arquivo(object):
     Construtor da classe
     '''
     def __init__(self):
-        self.__conteudo = self._lerArquivo()
+        self._conteudo = self._ler_arquivo()
 
-    '''
-    Efetua a leitura no arquivo
-    '''
-    def _lerArquivo(self):
+    def _ler_arquivo(self):
         return sys.stdin.readlines()
 
-
-    def _getTodoConteudo(self):
-
-        return self.__conteudo
-
-    def _getEstados(self):
+    def get_estados(self):
         
-        estados = self.__conteudo[1]
-
+        estados = self._conteudo[1]
+        
+        # Manipulando as strings
         estados = estados.split(',')
         estados = [estados.strip() for estados in estados]
         estados = [estados.replace("{", "").replace("}", "") for estados in estados]
         estados = list(filter(None, estados))
 
         return estados
-    
 
-    def _getAlfabetoEntrada(self):
+    def get_alfabeto_entrada(self):
 
-        alfabetoEntrada = self.__conteudo[2]
+        alfabetoEntrada = self._conteudo[2]
 
+        # Manipulando as strings
         alfabetoEntrada = [alfabetoEntrada.strip() for alfabetoEntrada in alfabetoEntrada]
         alfabetoEntrada = [alfabetoEntrada.replace("{", "").replace("}", "").replace(",", "") for alfabetoEntrada in alfabetoEntrada]
         alfabetoEntrada = list(filter(None, alfabetoEntrada))
 
         return alfabetoEntrada
 
+    def get_alfabeto_fita(self):
 
-    def _getAlfabetoFita(self):
+        alfabetoFita = self._conteudo[3]
 
-        alfabetoFita = self.__conteudo[3]
-
+        # Manipulando as strings
         alfabetoFita = [alfabetoFita.strip() for alfabetoFita in alfabetoFita]
         alfabetoFita = [alfabetoFita.replace("{", "").replace("}", "").replace(",", "") for alfabetoFita in alfabetoFita]
         alfabetoFita = list(filter(None, alfabetoFita))
 
         return alfabetoFita
 
-
-    def _getTransicoes(self):
+    def get_transicoes(self):
 
         # Considera como transição toda linha que contém um caractere '>'
-        transicoes = [transicao for transicao in self.__conteudo if '>' in transicao]
+        transicoes = [transicao for transicao in self._conteudo if '>' in transicao]
+
+        # Manipulando as strings
         transicoes = [transicoes.strip() for transicoes in transicoes]
         transicoes = [transicoes.replace("-", ",").replace(">", "").replace("(", "")
                         .replace(")", "").replace("\t", "") for transicoes in transicoes]
@@ -80,18 +73,18 @@ class Arquivo(object):
 
         return transicoes
 
-    def _getEstadoInicial(self):
+    def get_estado_inicial(self):
         
-        estadoInicial = self.__conteudo[len(self.__conteudo) -3]
+        estadoInicial = self._conteudo[len(self._conteudo) -3]
 
+        # Manipulando as strings
         estadoInicial = [estadoInicial.strip()]
         estadoInicial = [estadoInicial.replace("{", "").replace("}", "") for estadoInicial in estadoInicial]
         
         return estadoInicial
 
-    def _getPalavraEntrada(self):
+    def get_palavra_entrada(self):
         
-        palavraEntrada = self.__conteudo[len(self.__conteudo) -1]
-        # palavraEntrada = [palavraEntrada]
+        palavraEntrada = self._conteudo[len(self._conteudo) -1]
 
         return palavraEntrada
