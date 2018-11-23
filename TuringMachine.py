@@ -1,5 +1,8 @@
 import sys
 
+'''
+Classe responsável pela criação e execução da M.T.
+'''
 class TuringMachine(object):
 
     '''
@@ -40,8 +43,7 @@ class TuringMachine(object):
             if (self._transicoes[i][0] == self._estado_atual
                     and self._transicoes[i][1] == simbolo):
             
-                # Escreve o novo simbolo na fita. É necessário transformar a fita em Lista, modificá-la e voltar para
-                # String, pois em python Strings são imutáveis
+                # Escreve o novo simbolo na fita.
                 fita_em_lista = list(self._fita)
                 fita_em_lista[self._posicao_cabeca_leitura] = self._transicoes[i][3]
                 self._fita = ''.join(map(str, fita_em_lista))

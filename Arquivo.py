@@ -1,5 +1,9 @@
 import sys
 
+'''
+Classe que realiza a leitura do arquivo
+e faz os tratamentos necessários
+'''
 class Arquivo(object):
 
     '''
@@ -11,6 +15,9 @@ class Arquivo(object):
     def _ler_arquivo(self):
         return sys.stdin.readlines()
 
+    '''
+    Retorna os estados da M.T.
+    '''
     def get_estados(self):
         
         estados = self._conteudo[1]
@@ -23,6 +30,9 @@ class Arquivo(object):
 
         return estados
 
+    '''
+    Retorna o alfabeto de entrada (Σ)
+    '''
     def get_alfabeto_entrada(self):
 
         alfabetoEntrada = self._conteudo[2]
@@ -34,6 +44,9 @@ class Arquivo(object):
 
         return alfabetoEntrada
 
+    '''
+    Retorna o alfabeto da fita (Γ)
+    '''
     def get_alfabeto_fita(self):
 
         alfabetoFita = self._conteudo[3]
@@ -45,6 +58,9 @@ class Arquivo(object):
 
         return alfabetoFita
 
+    '''
+    Retorna o conjunto de transições da M.T. (δ)
+    '''
     def get_transicoes(self):
 
         # Considera como transição toda linha que contém um caractere '>'
@@ -73,6 +89,9 @@ class Arquivo(object):
 
         return transicoes
 
+    '''
+    Retorna o estado inicial da M.T. (q0)
+    '''
     def get_estado_inicial(self):
         
         estadoInicial = self._conteudo[len(self._conteudo) -3]
@@ -83,6 +102,9 @@ class Arquivo(object):
         
         return estadoInicial
 
+    '''
+    Retorna a palavra de entrada para ser processada pela M.T.
+    '''
     def get_palavra_entrada(self):
         
         palavraEntrada = self._conteudo[len(self._conteudo) -1]
